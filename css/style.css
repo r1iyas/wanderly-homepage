@@ -564,6 +564,9 @@ main .section {
   left: 50%;
   bottom: var(--space-6);
   z-index: 300;
+  /* With left: 50% the box would only use the right half of the screen and
+     wrap early, so size it to its text instead, capped at the screen width */
+  width: max-content;
   max-width: calc(100% - 2 * var(--container-pad));
   padding: var(--space-3) var(--space-6);
   border-radius: var(--radius-md);
@@ -581,4 +584,133 @@ main .section {
 .toast.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
+}
+
+/* ==========================================================
+   Travel packages (Step 6)
+   ========================================================== */
+.package-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;              /* phones and tablets: one per row */
+  gap: var(--space-8);
+  max-width: 480px;                        /* keeps single cards from getting too wide */
+  margin-inline: auto;
+}
+
+@media (min-width: 900px) {
+  .package-grid {
+    grid-template-columns: repeat(3, 1fr); /* desktop: three side by side */
+    max-width: none;
+  }
+}
+
+/* Same card base as the destination cards */
+.package-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Wrapper so the badge can be positioned on top of the photo */
+.package-card__media {
+  position: relative;
+}
+
+.package-card__image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.package-card__badge {
+  position: absolute;          /* placed relative to .package-card__media */
+  top: var(--space-4);
+  left: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  background-color: var(--color-coral);
+  color: var(--color-white);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.package-card__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: var(--space-6);
+}
+
+.package-card__duration {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ocean);
+}
+
+.package-card__title {
+  margin-block: var(--space-1) var(--space-4);
+}
+
+/* Feature list with a CSS-drawn tick instead of bullets */
+.package-card__features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-6);
+  display: grid;
+  gap: var(--space-2);
+  color: var(--color-ink-soft);
+}
+
+.package-card__features li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+
+.package-card__features li::before {
+  content: "";                 /* empty, so screen readers have nothing to read */
+  position: absolute;
+  left: 2px;
+  top: 0.35em;
+  width: 6px;
+  height: 11px;
+  border: solid var(--color-ocean);
+  border-width: 0 2px 2px 0;   /* only the right and bottom edges... */
+  transform: rotate(45deg);    /* ...rotated into a tick shape */
+}
+
+.package-card__price {
+  margin-top: auto;            /* pushes price and buttons to the bottom of the card */
+  margin-bottom: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-sand-deep);
+  color: var(--color-ink-soft);
+}
+
+.package-card__price strong {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-ink);
+}
+
+.package-card__actions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.package-card__actions .btn {
+  flex: 1;                     /* both buttons share the width equally */
 }
