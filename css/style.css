@@ -365,8 +365,91 @@ p {
   }
 }
 
-/* Placeholder sections: give anchors room to scroll below the sticky header */
+/* Anchor targets: stop below the sticky header instead of hiding under it */
 main section[id] {
   scroll-margin-top: 80px;
+}
+
+/* Placeholder sections: keep some height until their real content arrives.
+   Scoped to .section so it does not override the hero's own height. */
+main .section {
   min-height: 160px;
+}
+
+/* ==========================================================
+   Hero (Step 4)
+   ========================================================== */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* Tall enough to feel like a welcome screen, but never huge on big monitors */
+  min-height: clamp(520px, 80vh, 760px);
+  padding-block: var(--space-16);
+  color: var(--color-white);
+  /* Two backgrounds stacked: a dark gradient on top so the white text stays
+     readable, and the photo underneath. The image is decorative, so it lives
+     in CSS rather than in an <img> tag. */
+  background-image:
+    linear-gradient(90deg, rgba(27, 36, 48, 0.85) 0%, rgba(27, 36, 48, 0.55) 55%, rgba(27, 36, 48, 0.2) 100%),
+    url("../assets/images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-ink); /* shows while the photo loads */
+}
+
+.hero__content {
+  max-width: 600px;
+}
+
+.hero__eyebrow {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sand-deep);
+}
+
+.hero__title {
+  margin-bottom: var(--space-6);
+  color: var(--color-white); /* overrides the dark ink colour set on all h1s */
+}
+
+.hero__text {
+  margin-bottom: var(--space-8);
+  font-size: var(--text-lg);
+  color: var(--color-sand);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap; /* buttons stack onto two lines on narrow phones */
+  gap: var(--space-4);
+}
+
+/* Outline button for dark backgrounds (the teal .btn--secondary would be too dark here) */
+.btn--outline-light {
+  background-color: transparent;
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+.btn--outline-light:hover {
+  background-color: var(--color-white);
+  color: var(--color-ink);
+}
+
+/* Phones: darken the whole photo evenly, because the text spans the full width */
+@media (max-width: 767px) {
+  .hero {
+    min-height: 480px;
+    background-image:
+      linear-gradient(rgba(27, 36, 48, 0.7), rgba(27, 36, 48, 0.7)),
+      url("../assets/images/hero.jpg");
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 100%; /* full-width, easy-to-tap buttons */
+  }
 }
