@@ -14,6 +14,8 @@
   --color-coral: #F26B4F;        /* call-to-action accent */
   --color-coral-dark: #D9553B;   /* CTA hover state */
   --color-white: #FFFFFF;
+  --color-error: #B42318;        /* form error messages (Step 8) */
+  --color-success: #0A5256;      /* form success message (Step 8) */
 
   /* Typography */
   --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
@@ -760,4 +762,124 @@ main .section {
 .feature__text {
   margin-inline: auto;
   color: var(--color-ink-soft);
+}
+
+/* ==========================================================
+   Plan your trip: contact form (Step 8)
+   ========================================================== */
+.contact-form {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 600px) {
+  .contact-form {
+    padding: var(--space-12);
+  }
+}
+
+.contact-form__note {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;              /* phones: one field per row */
+  gap: var(--space-6);
+}
+
+@media (min-width: 600px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr); /* larger screens: two per row */
+  }
+
+  .form-field--full {
+    grid-column: 1 / -1;                   /* the message box spans both columns */
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-field__label {
+  font-weight: 600;
+}
+
+.form-field__required {
+  color: var(--color-error);
+}
+
+/* One style shared by inputs, the select and the textarea */
+.form-field__input {
+  width: 100%;
+  min-height: 48px;                        /* comfortable tap target */
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--color-ink-soft);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-white);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-field__input:focus {
+  outline: none;                           /* replaced by the clearer ring below */
+  border-color: var(--color-ocean);
+  box-shadow: 0 0 0 3px rgba(14, 110, 115, 0.25);
+}
+
+textarea.form-field__input {
+  resize: vertical;                        /* users can make it taller, not wider */
+}
+
+.form-field__hint {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+/* Error state: the script sets aria-invalid="true" on fields that fail */
+.form-field__input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+
+.form-field__input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.2);
+}
+
+.form-field__error {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-error);
+}
+
+.form-field__error:empty {
+  display: none;                           /* no gap when there is no error */
+}
+
+.contact-form__submit {
+  width: 100%;
+  margin-top: var(--space-8);
+  padding-block: var(--space-4);
+}
+
+@media (min-width: 600px) {
+  .contact-form__submit {
+    width: auto;
+  }
+}
+
+.contact-form__status:not(:empty) {
+  margin-top: var(--space-6);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  background-color: rgba(14, 110, 115, 0.1);
+  color: var(--color-success);
+  font-weight: 600;
 }

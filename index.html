@@ -278,11 +278,88 @@
       </div>
     </section>
 
-    <!-- Placeholder sections: filled in during Steps 8 and 9 -->
-
+    <!-- Plan your trip: contact form (Step 8) -->
     <section class="section" id="contact" aria-labelledby="contact-title">
-      <div class="container"><h2 id="contact-title">Plan Your Trip (Step 8)</h2></div>
+      <div class="container">
+        <div class="section__header">
+          <h2 id="contact-title">Ready for Your Next Adventure?</h2>
+          <p>Tell us a little about the trip you have in mind and a travel planner will get back to you within one working day.</p>
+        </div>
+
+        <!-- novalidate turns off the browser's own pop-up messages so our
+             JavaScript can show clearer messages under each field instead -->
+        <form class="contact-form" id="contact-form" novalidate>
+          <p class="contact-form__note">Fields marked <span aria-hidden="true">*</span> are required.</p>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-field__label" for="name">Full name <span class="form-field__required" aria-hidden="true">*</span></label>
+              <input class="form-field__input" id="name" name="name" type="text"
+                     autocomplete="name" required aria-describedby="name-error">
+              <p class="form-field__error" id="name-error"></p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="email">Email address <span class="form-field__required" aria-hidden="true">*</span></label>
+              <input class="form-field__input" id="email" name="email" type="email"
+                     autocomplete="email" required aria-describedby="email-error">
+              <p class="form-field__error" id="email-error"></p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="phone">Phone number</label>
+              <input class="form-field__input" id="phone" name="phone" type="tel"
+                     autocomplete="tel" aria-describedby="phone-hint phone-error">
+              <p class="form-field__hint" id="phone-hint">Optional. 10-digit mobile number, e.g. 98765 43210</p>
+              <p class="form-field__error" id="phone-error"></p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="destination">Destination <span class="form-field__required" aria-hidden="true">*</span></label>
+              <select class="form-field__input" id="destination" name="destination"
+                      required aria-describedby="destination-error">
+                <option value="">Choose a destination</option>
+                <option>Bali</option>
+                <option>Dubai</option>
+                <option>Maldives</option>
+                <option>Switzerland</option>
+                <option>Not sure yet</option>
+              </select>
+              <p class="form-field__error" id="destination-error"></p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="date">Travel date <span class="form-field__required" aria-hidden="true">*</span></label>
+              <input class="form-field__input" id="date" name="date" type="date"
+                     required aria-describedby="date-error">
+              <p class="form-field__error" id="date-error"></p>
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="travellers">Number of travellers <span class="form-field__required" aria-hidden="true">*</span></label>
+              <input class="form-field__input" id="travellers" name="travellers" type="number"
+                     min="1" max="20" value="2" inputmode="numeric" required aria-describedby="travellers-error">
+              <p class="form-field__error" id="travellers-error"></p>
+            </div>
+
+            <div class="form-field form-field--full">
+              <label class="form-field__label" for="message">Tell us about your trip</label>
+              <textarea class="form-field__input" id="message" name="message" rows="4"
+                        maxlength="500" aria-describedby="message-hint message-error"></textarea>
+              <p class="form-field__hint" id="message-hint">Optional. Up to 500 characters.</p>
+              <p class="form-field__error" id="message-error"></p>
+            </div>
+          </div>
+
+          <button class="btn btn--primary contact-form__submit" type="submit">Send My Trip Request</button>
+
+          <!-- Success message. role="status" makes screen readers read it out. -->
+          <p class="contact-form__status" id="form-status" role="status"></p>
+        </form>
+      </div>
     </section>
+
+    <!-- Placeholder section: filled in during Step 9 -->
 
   </main>
 
