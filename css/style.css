@@ -714,3 +714,50 @@ main .section {
 .package-card__actions .btn {
   flex: 1;                     /* both buttons share the width equally */
 }
+
+/* ==========================================================
+   Why choose us (Step 7)
+   ========================================================== */
+.feature-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;              /* phones and tablets: one per row */
+  gap: var(--space-8);
+}
+
+/* Three items: skip a two-column layout, which would leave one item alone */
+@media (min-width: 900px) {
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr); /* desktop: all three in one row */
+  }
+}
+
+.feature {
+  text-align: center;
+  padding: var(--space-8) var(--space-6);
+  background-color: var(--color-sand);
+  border-radius: var(--radius-md);
+}
+
+/* Teal circle behind each icon */
+.feature__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--space-4);
+  border-radius: 50%;
+  background-color: var(--color-ocean);
+  color: var(--color-white);   /* the SVG uses stroke="currentColor", so it turns white */
+}
+
+.feature__title {
+  margin-bottom: var(--space-2);
+}
+
+.feature__text {
+  margin-inline: auto;
+  color: var(--color-ink-soft);
+}
