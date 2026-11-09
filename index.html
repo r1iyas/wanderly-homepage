@@ -56,11 +56,80 @@
       </div>
     </section>
 
-    <!-- Placeholder sections: filled in during Steps 5 to 9 -->
-
+    <!-- Popular destinations (Step 5) -->
     <section class="section section--alt" id="destinations" aria-labelledby="destinations-title">
-      <div class="container"><h2 id="destinations-title">Popular Destinations (Step 5)</h2></div>
+      <div class="container">
+        <div class="section__header">
+          <h2 id="destinations-title">Popular Destinations</h2>
+          <p>Four places our travellers keep coming back to, each with trips we can shape around you.</p>
+        </div>
+
+        <ul class="dest-grid">
+          <li>
+            <article class="dest-card">
+              <img class="dest-card__image" src="assets/images/bali.jpg" width="667" height="1000" loading="lazy"
+                   alt="Carved stone temple gateway surrounded by tall jungle trees in Bali">
+              <div class="dest-card__body">
+                <p class="dest-card__region">Indonesia</p>
+                <h3 class="dest-card__title">Bali</h3>
+                <p class="dest-card__text">Temples, rice terraces and slow mornings by the sea.</p>
+                <button class="btn btn--secondary btn--small" type="button"
+                        data-coming-soon="Our Bali guide is coming soon.">
+                  Explore <span class="visually-hidden">Bali</span>
+                </button>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="dest-card">
+              <img class="dest-card__image" src="assets/images/dubai.jpg" width="800" height="1067" loading="lazy"
+                   alt="Glass skyscrapers along the Dubai waterfront with the Burj Khalifa in the distance">
+              <div class="dest-card__body">
+                <p class="dest-card__region">United Arab Emirates</p>
+                <h3 class="dest-card__title">Dubai</h3>
+                <p class="dest-card__text">Skyline views, desert evenings and world-class dining.</p>
+                <button class="btn btn--secondary btn--small" type="button"
+                        data-coming-soon="Our Dubai guide is coming soon.">
+                  Explore <span class="visually-hidden">Dubai</span>
+                </button>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="dest-card">
+              <img class="dest-card__image" src="assets/images/maldives.jpg" width="800" height="449" loading="lazy"
+                   alt="White sand beach lined with palm trees beside turquoise water in the Maldives">
+              <div class="dest-card__body">
+                <p class="dest-card__region">Indian Ocean</p>
+                <h3 class="dest-card__title">Maldives</h3>
+                <p class="dest-card__text">Clear lagoons, coral reefs and barefoot island days.</p>
+                <button class="btn btn--secondary btn--small" type="button"
+                        data-coming-soon="Our Maldives guide is coming soon.">
+                  Explore <span class="visually-hidden">the Maldives</span>
+                </button>
+              </div>
+            </article>
+          </li>
+          <li>
+            <article class="dest-card">
+              <img class="dest-card__image" src="assets/images/switzerland.jpg" width="800" height="600" loading="lazy"
+                   alt="Snow-covered mountain valley and forest beside a calm lake in Switzerland">
+              <div class="dest-card__body">
+                <p class="dest-card__region">Europe</p>
+                <h3 class="dest-card__title">Switzerland</h3>
+                <p class="dest-card__text">Alpine villages, scenic railways and fresh mountain air.</p>
+                <button class="btn btn--secondary btn--small" type="button"
+                        data-coming-soon="Our Switzerland guide is coming soon.">
+                  Explore <span class="visually-hidden">Switzerland</span>
+                </button>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
     </section>
+
+    <!-- Placeholder sections: filled in during Steps 6 to 9 -->
 
     <section class="section" id="packages" aria-labelledby="packages-title">
       <div class="container"><h2 id="packages-title">Travel Packages (Step 6)</h2></div>
@@ -79,6 +148,9 @@
   <footer class="site-footer">
     <div class="container"><p>Footer (Step 9)</p></div>
   </footer>
+
+  <!-- Shared "coming soon" message. role="status" makes screen readers read it out. -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/main.js"></script>
 </body>

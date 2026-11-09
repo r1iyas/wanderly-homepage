@@ -453,3 +453,132 @@ main .section {
     flex: 1 1 100%; /* full-width, easy-to-tap buttons */
   }
 }
+
+/* ==========================================================
+   Popular destinations (Step 5)
+   ========================================================== */
+
+/* Hides text visually but keeps it for screen readers,
+   e.g. "Explore Bali" is read out while sighted users see "Explore" */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The cards are a list, so remove the default bullets and indent */
+.dest-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;              /* phones: one card per row */
+  gap: var(--space-6);
+}
+
+@media (min-width: 600px) {
+  .dest-grid {
+    grid-template-columns: repeat(2, 1fr); /* tablets: two per row */
+  }
+}
+
+@media (min-width: 1024px) {
+  .dest-grid {
+    grid-template-columns: repeat(4, 1fr); /* desktop: all four in one row */
+  }
+}
+
+.dest-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;                  /* every card in a row is the same height */
+  overflow: hidden;              /* keeps the zoomed image inside the rounded corners */
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.dest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* The photos have different shapes, so crop them all to the same frame */
+.dest-card__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;             /* fill the frame without stretching */
+  transition: transform 400ms ease;
+}
+
+.dest-card:hover .dest-card__image {
+  transform: scale(1.05);
+}
+
+@media (min-width: 1024px) {
+  .dest-card__image {
+    aspect-ratio: 3 / 4;         /* taller frames suit the narrow four-column cards */
+  }
+}
+
+.dest-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;                  /* fills leftover space so the buttons line up */
+  padding: var(--space-6);
+}
+
+.dest-card__region {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ocean);
+}
+
+.dest-card__title {
+  margin-block: var(--space-1) var(--space-2);
+}
+
+.dest-card__text {
+  margin-bottom: var(--space-6);
+  color: var(--color-ink-soft);
+}
+
+.dest-card .btn {
+  margin-top: auto;              /* pushes the button to the bottom of the card */
+}
+
+/* ==========================================================
+   "Coming soon" message (shared by Steps 5 and 6)
+   ========================================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-6);
+  z-index: 300;
+  max-width: calc(100% - 2 * var(--container-pad));
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  box-shadow: var(--shadow-card-hover);
+  text-align: center;
+  /* Hidden by default: transparent, nudged down and ignoring clicks */
+  opacity: 0;
+  transform: translate(-50%, 1rem);
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

@@ -42,3 +42,31 @@
     MOBILE_QUERY.addListener(handleResize); // older browsers
   }
 })();
+
+/* Wanderly: "coming soon" messages (Step 5, reused by Step 6) */
+(function () {
+  "use strict";
+
+  var toast = document.getElementById("toast");
+  var hideTimer = null;
+
+  if (!toast) return;
+
+  function showMessage(text) {
+    toast.textContent = text;            // role="status" makes screen readers announce this
+    toast.classList.add("is-visible");
+
+    // If another button was clicked a moment ago, restart the countdown
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(function () {
+      toast.classList.remove("is-visible");
+    }, 3000);
+  }
+
+  // One listener on the whole page handles every button that has a
+  // data-coming-soon attribute, including the ones added in later steps
+  document.addEventListener("click", function (event) {
+    var button = event.target.closest("[data-coming-soon]");
+    if (button) showMessage(button.getAttribute("data-coming-soon"));
+  });
+})();
