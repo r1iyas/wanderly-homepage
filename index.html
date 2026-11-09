@@ -10,5 +10,61 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="container site-header__inner">
+      <a class="brand" href="#top" aria-label="Wanderly home">Wanderly</a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#top">Home</a></li>
+          <li><a class="site-nav__link" href="#destinations">Destinations</a></li>
+          <li><a class="site-nav__link" href="#packages">Packages</a></li>
+          <li><a class="site-nav__link" href="#about">About</a></li>
+          <li><a class="site-nav__link" href="#contact">Contact</a></li>
+        </ul>
+        <a class="btn btn--primary btn--small site-nav__cta" href="#contact">Plan Your Trip</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Placeholder sections: filled in during Steps 4 to 7 -->
+    <section class="section" id="hero-placeholder" aria-label="Hero placeholder">
+      <div class="container"><p>Hero (Step 4)</p></div>
+    </section>
+
+    <section class="section section--alt" id="destinations" aria-labelledby="destinations-title">
+      <div class="container"><h2 id="destinations-title">Popular Destinations (Step 5)</h2></div>
+    </section>
+
+    <section class="section" id="packages" aria-labelledby="packages-title">
+      <div class="container"><h2 id="packages-title">Travel Packages (Step 6)</h2></div>
+    </section>
+
+    <section class="section section--alt" id="about" aria-labelledby="about-title">
+      <div class="container"><h2 id="about-title">Why Choose Us (Step 7)</h2></div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container"><h2 id="contact-title">Plan Your Trip (Step 8)</h2></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p>Footer (Step 9)</p></div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
