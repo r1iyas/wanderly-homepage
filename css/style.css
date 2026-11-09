@@ -4,21 +4,22 @@
 
 /* ---------- Design tokens ---------- */
 :root {
-  /* Colours */
-  --color-ocean: #0E6E73;        /* primary brand: deep teal */
-  --color-ocean-dark: #0A5256;   /* hover and pressed states */
-  --color-sand: #F7F2EA;         /* page background */
-  --color-sand-deep: #EDE4D6;    /* alternate section background */
-  --color-ink: #1B2430;          /* main text */
-  --color-ink-soft: #5A6573;     /* secondary text */
+  /* Colours: dark theme. Names describe the job, not the shade,
+     so the theme can change without renaming anything. */
+  --color-bg: #020105;           /* page background (near black) */
+  --color-bg-alt: #0E0C13;       /* alternate sections and footer, a step lighter */
+  --color-surface: #17141E;      /* cards and panels that sit on the background */
+  --color-border: #2B2733;       /* dividers and card outlines */
+  --color-text: #F4F1EC;         /* main text: warm off-white */
+  --color-text-soft: #B5AFBC;    /* secondary text */
+  --color-ocean: #0E6E73;        /* brand teal for filled shapes (logo, icon circles) */
+  --color-ocean-light: #5ECBCF;  /* lighter teal for text and outlines, readable on dark */
   --color-coral: #F26B4F;        /* call-to-action accent */
   --color-coral-dark: #D9553B;   /* CTA hover state */
-  --color-white: #FFFFFF;
-  --color-error: #B42318;        /* form error messages (Step 8) */
-  --color-success: #0A5256;      /* form success message (Step 8) */
+  --color-white: #FFFFFF;        /* text on coral and teal fills, and on the hero photo */
 
   /* Typography */
-  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-heading: "Story Script", sans-serif;  /* headings and logo */
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --text-sm: 0.875rem;
@@ -46,8 +47,9 @@
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  --shadow-card: 0 6px 20px rgba(27, 36, 48, 0.08);
-  --shadow-card-hover: 0 12px 28px rgba(27, 36, 48, 0.16);
+  /* Shadows are stronger on a dark page, or they disappear */
+  --shadow-card: 0 6px 20px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.6);
   --transition: 200ms ease;
 }
 
@@ -71,8 +73,8 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
-  color: var(--color-ink);
-  background-color: var(--color-sand);
+  color: var(--color-text);
+  background-color: var(--color-bg);
   overflow-x: hidden; /* no horizontal scroll on mobile */
   -webkit-font-smoothing: antialiased;
 }
@@ -106,8 +108,8 @@ h3,
 h4 {
   font-family: var(--font-heading);
   line-height: 1.2;
-  color: var(--color-ink);
-  font-weight: 600;
+  color: var(--color-text);
+  font-weight: 400;  /* Story Script only has a regular weight; 600 would be faked */
 }
 
 h1 { font-size: var(--text-4xl); }
@@ -132,7 +134,7 @@ p {
 }
 
 .section--alt {
-  background-color: var(--color-sand-deep);
+  background-color: var(--color-bg-alt);
 }
 
 .section__header {
@@ -142,7 +144,7 @@ p {
 
 .section__header p {
   margin-inline: auto;
-  color: var(--color-ink-soft);
+  color: var(--color-text-soft);
 }
 
 /* ---------- Buttons ---------- */
@@ -185,8 +187,8 @@ p {
 
 .btn--secondary {
   background-color: transparent;
-  border-color: var(--color-ocean);
-  color: var(--color-ocean);
+  border-color: var(--color-ocean-light);
+  color: var(--color-ocean-light);
 }
 
 .btn--secondary:hover {
@@ -241,8 +243,8 @@ p {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: var(--color-sand);
-  border-bottom: 1px solid var(--color-sand-deep);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .site-header__inner {
@@ -253,10 +255,35 @@ p {
 }
 
 .brand {
+  display: inline-flex;          /* puts the logo mark and the name side by side */
+  align-items: center;           /* lines them up vertically */
+  gap: var(--space-2);
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  font-weight: 600;
-  color: var(--color-ocean);
+  font-weight: 400;
+  color: var(--color-ocean-light);
+}
+
+/* Logo mark colours come from the design tokens, so they change in one place */
+.brand__mark {
+  flex-shrink: 0;                /* never squashed on narrow screens */
+}
+
+.brand__mark-bg {
+  fill: var(--color-ocean);
+}
+
+.brand__mark-letter {
+  font-family: var(--font-heading);  /* same Story Script font as the name beside it */
+  font-size: 19px;                   /* in the SVG's own 32-unit grid */
+  font-weight: 400;
+  fill: var(--color-white);          /* SVG text is coloured with fill, not color */
+}
+
+.brand__mark-dot {
+  fill: var(--color-coral);
+  stroke: var(--color-bg);         /* thin ring in the header background colour separates it from the circle */
+  stroke-width: 1.5;
 }
 
 /* Hamburger button (mobile only) */
@@ -278,7 +305,7 @@ p {
   display: block;
   height: 2px;
   width: 100%;
-  background-color: var(--color-ink);
+  background-color: var(--color-text);
   border-radius: 2px;
   transition: transform var(--transition), opacity var(--transition);
 }
@@ -302,8 +329,8 @@ p {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: var(--color-sand);
-  border-bottom: 1px solid var(--color-sand-deep);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
   padding: var(--space-6) var(--container-pad);
   box-shadow: var(--shadow-card);
 }
@@ -328,7 +355,7 @@ p {
 }
 
 .site-nav__link:hover {
-  color: var(--color-ocean);
+  color: var(--color-ocean-light);
 }
 
 .site-nav__cta {
@@ -387,11 +414,11 @@ main section[id] {
      readable, and the photo underneath. The image is decorative, so it lives
      in CSS rather than in an <img> tag. */
   background-image:
-    linear-gradient(90deg, rgba(27, 36, 48, 0.85) 0%, rgba(27, 36, 48, 0.55) 55%, rgba(27, 36, 48, 0.2) 100%),
+    linear-gradient(90deg, rgba(2, 1, 5, 0.85) 0%, rgba(2, 1, 5, 0.55) 55%, rgba(2, 1, 5, 0.2) 100%),
     url("../assets/images/hero.jpg");
   background-size: cover;
   background-position: center;
-  background-color: var(--color-ink); /* shows while the photo loads */
+  background-color: var(--color-bg); /* shows while the photo loads */
 }
 
 .hero__content {
@@ -404,18 +431,18 @@ main section[id] {
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-sand-deep);
+  color: var(--color-text-soft);
 }
 
 .hero__title {
   margin-bottom: var(--space-6);
-  color: var(--color-white); /* overrides the dark ink colour set on all h1s */
+  color: var(--color-white); /* pure white for the strongest contrast on the photo */
 }
 
 .hero__text {
   margin-bottom: var(--space-8);
   font-size: var(--text-lg);
-  color: var(--color-sand);
+  color: var(--color-text);
 }
 
 .hero__actions {
@@ -433,7 +460,7 @@ main section[id] {
 
 .btn--outline-light:hover {
   background-color: var(--color-white);
-  color: var(--color-ink);
+  color: var(--color-bg);
 }
 
 /* Phones: darken the whole photo evenly, because the text spans the full width */
@@ -441,7 +468,7 @@ main section[id] {
   .hero {
     min-height: 480px;
     background-image:
-      linear-gradient(rgba(27, 36, 48, 0.7), rgba(27, 36, 48, 0.7)),
+      linear-gradient(rgba(2, 1, 5, 0.7), rgba(2, 1, 5, 0.7)),
       url("../assets/images/hero.jpg");
   }
 
@@ -493,8 +520,9 @@ main section[id] {
   display: flex;
   flex-direction: column;
   height: 100%;                  /* every card in a row is the same height */
+  border: 1px solid var(--color-border);   /* outline keeps cards visible on the dark page */
   overflow: hidden;              /* keeps the zoomed image inside the rounded corners */
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   transition: transform var(--transition), box-shadow var(--transition);
@@ -536,7 +564,7 @@ main section[id] {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-ocean);
+  color: var(--color-ocean-light);
 }
 
 .dest-card__title {
@@ -545,7 +573,7 @@ main section[id] {
 
 .dest-card__text {
   margin-bottom: var(--space-6);
-  color: var(--color-ink-soft);
+  color: var(--color-text-soft);
 }
 
 .dest-card .btn {
@@ -566,8 +594,8 @@ main section[id] {
   max-width: calc(100% - 2 * var(--container-pad));
   padding: var(--space-3) var(--space-6);
   border-radius: var(--radius-md);
-  background-color: var(--color-ink);
-  color: var(--color-white);
+  background-color: var(--color-text);
+  color: var(--color-bg);
   box-shadow: var(--shadow-card-hover);
   text-align: center;
   /* Hidden by default: transparent, nudged down and ignoring clicks */
@@ -607,8 +635,9 @@ main section[id] {
   display: flex;
   flex-direction: column;
   height: 100%;
+  border: 1px solid var(--color-border);
   overflow: hidden;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-card);
   transition: transform var(--transition), box-shadow var(--transition);
@@ -654,7 +683,7 @@ main section[id] {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-ocean);
+  color: var(--color-ocean-light);
 }
 
 .package-card__title {
@@ -668,7 +697,7 @@ main section[id] {
   margin-bottom: var(--space-6);
   display: grid;
   gap: var(--space-2);
-  color: var(--color-ink-soft);
+  color: var(--color-text-soft);
 }
 
 .package-card__features li {
@@ -683,7 +712,7 @@ main section[id] {
   top: 0.35em;
   width: 6px;
   height: 11px;
-  border: solid var(--color-ocean);
+  border: solid var(--color-ocean-light);
   border-width: 0 2px 2px 0;   /* only the right and bottom edges... */
   transform: rotate(45deg);    /* ...rotated into a tick shape */
 }
@@ -692,14 +721,15 @@ main section[id] {
   margin-top: auto;            /* pushes price and buttons to the bottom of the card */
   margin-bottom: var(--space-4);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-sand-deep);
-  color: var(--color-ink-soft);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-soft);
 }
 
 .package-card__price strong {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);   /* numbers stay in Inter: easier to read than script */
+  font-weight: 600;
   font-size: var(--text-2xl);
-  color: var(--color-ink);
+  color: var(--color-text);
 }
 
 .package-card__actions {
@@ -708,7 +738,7 @@ main section[id] {
 }
 
 .package-card__actions .btn {
-  flex: 1;                     /* both buttons share the width equally */
+  flex: 1;                     /* the Book button stretches to the full card width */
 }
 
 /* ==========================================================
@@ -732,7 +762,7 @@ main section[id] {
 .feature {
   text-align: center;
   padding: var(--space-8) var(--space-6);
-  background-color: var(--color-sand);
+  background-color: var(--color-surface);
   border-radius: var(--radius-md);
 }
 
@@ -755,127 +785,20 @@ main section[id] {
 
 .feature__text {
   margin-inline: auto;
-  color: var(--color-ink-soft);
+  color: var(--color-text-soft);
 }
 
 /* ==========================================================
-   Plan your trip: contact form (Step 8)
+   Plan your trip: call to action
    ========================================================== */
-.contact-form {
-  max-width: 760px;
-  margin-inline: auto;
-  padding: var(--space-8) var(--space-6);
-  background-color: var(--color-white);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+.contact-cta {
+  margin-bottom: 0;              /* nothing follows it inside the section */
 }
 
-@media (min-width: 600px) {
-  .contact-form {
-    padding: var(--space-12);
-  }
-}
-
-.contact-form__note {
-  margin-bottom: var(--space-6);
-  font-size: var(--text-sm);
-  color: var(--color-ink-soft);
-}
-
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr;              /* phones: one field per row */
-  gap: var(--space-6);
-}
-
-@media (min-width: 600px) {
-  .form-grid {
-    grid-template-columns: repeat(2, 1fr); /* larger screens: two per row */
-  }
-
-  .form-field--full {
-    grid-column: 1 / -1;                   /* the message box spans both columns */
-  }
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.form-field__label {
-  font-weight: 600;
-}
-
-.form-field__required {
-  color: var(--color-error);
-}
-
-/* One style shared by inputs, the select and the textarea */
-.form-field__input {
-  width: 100%;
-  min-height: 48px;                        /* comfortable tap target */
-  padding: var(--space-3) var(--space-4);
-  border: 1.5px solid var(--color-ink-soft);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-white);
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-.form-field__input:focus {
-  outline: none;                           /* replaced by the clearer ring below */
-  border-color: var(--color-ocean);
-  box-shadow: 0 0 0 3px rgba(14, 110, 115, 0.25);
-}
-
-textarea.form-field__input {
-  resize: vertical;                        /* users can make it taller, not wider */
-}
-
-.form-field__hint {
-  font-size: var(--text-sm);
-  color: var(--color-ink-soft);
-}
-
-/* Error state: the script sets aria-invalid="true" on fields that fail */
-.form-field__input[aria-invalid="true"] {
-  border-color: var(--color-error);
-}
-
-.form-field__input[aria-invalid="true"]:focus {
-  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.2);
-}
-
-.form-field__error {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-error);
-}
-
-.form-field__error:empty {
-  display: none;                           /* no gap when there is no error */
-}
-
-.contact-form__submit {
-  width: 100%;
+.contact-cta__button {
   margin-top: var(--space-8);
-  padding-block: var(--space-4);
-}
-
-@media (min-width: 600px) {
-  .contact-form__submit {
-    width: auto;
-  }
-}
-
-.contact-form__status:not(:empty) {
-  margin-top: var(--space-6);
-  padding: var(--space-4);
-  border-radius: var(--radius-sm);
-  background-color: rgba(14, 110, 115, 0.1);
-  color: var(--color-success);
-  font-weight: 600;
+  padding: var(--space-4) var(--space-8);   /* larger than a normal button: it's the page's final action */
+  font-size: var(--text-lg);
 }
 
 /* ==========================================================
@@ -883,8 +806,8 @@ textarea.form-field__input {
    ========================================================== */
 .site-footer {
   padding-top: var(--space-16);
-  background-color: var(--color-ink);   /* dark band closes the page */
-  color: var(--color-sand-deep);
+  background-color: var(--color-bg-alt);   /* slightly lighter band closes the page */
+  color: var(--color-text-soft);
 }
 
 .site-footer__inner {
@@ -937,6 +860,17 @@ textarea.form-field__input {
 .site-footer__link:hover {
   color: var(--color-white);
   text-decoration-color: var(--color-coral);
+}
+
+/* A button made to look like the footer links: remove the browser's
+   default button grey box, border and padding */
+.site-footer__button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
 .site-footer__bottom {
