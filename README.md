@@ -2,9 +2,11 @@
 
 A responsive homepage for **Wanderly**, a fictional travel company, built with plain HTML, CSS and JavaScript. No frameworks, build tools or backend.
 
+**Live site:** https://r1iyas.github.io/wanderly-homepage/ (hosted on GitHub Pages)
+
 ## How to open it
 
-Open `index.html` in a browser. Everything else (CSS, JavaScript, images) is loaded with relative paths, so no setup is needed.
+Visit the live site above, or open `index.html` in a browser. Everything else (CSS, JavaScript, images) is loaded with relative paths, so no setup is needed.
 
 To view it on a local server instead (for example with the VS Code Live Server extension, or Node):
 
